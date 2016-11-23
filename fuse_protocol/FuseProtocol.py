@@ -5,7 +5,7 @@ import subprocess
 
 from threading import Thread
 
-class Client:
+class FuseProtocol:
     def __init__(self, name, logger = None):
         self.name = name
         self.receivers = []
@@ -26,7 +26,7 @@ class Client:
             self.logger.setLevel(logging.CRITICAL)
         else:
             self.logger = logger
-        self.logger.warning("Initialized client '{0}'".format(self.name))
+        self.logger.warning("Initialized FuseProtocol '{0}'".format(self.name))
 
     def _check_for_fuse(self):
         fuse_version= ["fuse", "--version"]

@@ -1,1 +1,1 @@
-from .Client import Client, create_default_logger, FuseNotFoundError, FuseError
+from .FuseProtocol import FuseProtocol, create_default_logger, FuseNotFoundError, FuseError

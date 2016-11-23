@@ -1,1 +1,2 @@
-- Rename Client to FuseProtocol
+- Have to parse output from daemon-client, append to a buffer and try to parse it like in https://github.com/fusetools/Fuse.AtomPlugin/blob/609a20b0f3652674fbd402880ddda5ae96c735ce/lib/daemonConnection.coffee#L28
+- Also don't use readline on the daemon-client process. Since the payload isn't newline-terminated, doing that makes us not receive a payload until the header for the next message has arrived
