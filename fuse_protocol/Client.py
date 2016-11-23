@@ -6,12 +6,15 @@ import subprocess
 from threading import Thread
 
 class Client:
-    def __init__(self, name, receive, logger = None):
+    def __init__(self, name, logger = None):
         self.name = name
-        self.receive = receive
+        self.receivers = []
         self._configure_logging(logger)
         self._check_for_fuse()
         self._start()
+
+    def add_receiver(self, receiver):
+        self.receivers.append(receiver)
 
     def send(self, msg_type, msg):
         self.process.stdin.write(self._format(msg_type, msg))
@@ -60,7 +63,8 @@ class Client:
 
     def _read_output(self, stdout):
         for line in iter(stdout.readline, b''):
-            self.receive(line)
+            for receiver in self.receivers:
+                receiver(line)
 
 class FuseNotFoundError(Exception):
     pass
